@@ -31,18 +31,26 @@ data class Comments(
     val canOpen: Boolean
 )
 
-object WallService {
+class WallService {
     private var posts = emptyArray<Post>()
+    private var nextId = 1
     fun add(post: Post): Post {
+        post.id = nextId
+        nextId++
         posts += post
         return posts.last()
     }
 
-    fun likeById(id: Int) {
-        for ((index, post) in posts.withIndex()) {
-            if (post.id == id) {
-                posts[index].likes = posts[index].likes.copy(count = post.likes.count + 1)
-            }
+    fun update(post: Post): Boolean {
+        val index = posts.indexOfFirst { it.id == post.id }
+        if (index != -1) {
+            posts[index] = post
+            return true
         }
+        return false
     }
+}
+
+fun main() {
+    var post1 = Post(1, 2, 3, 2, 2023, "privet", 1, 1, true, "privet", true, true, true, likes = Likes(1, true, true, true), comments = Comments(5, true, true, true, true))
 }

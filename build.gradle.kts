@@ -1,5 +1,7 @@
 plugins {
     kotlin("jvm") version "1.9.21"
+    id("jacoco")
+    id("java")
 }
 
 group = "org.example"
@@ -10,12 +12,10 @@ repositories {
 }
 
 dependencies {
-    testImplementation("org.jetbrains.kotlin:kotlin-test")
+    implementation ("org.jetbrains.kotlin:kotlin-stdlib")
+    testImplementation("junit:junit:4.13.2")
 }
 
-tasks.test {
-    useJUnitPlatform()
-}
-kotlin {
-    jvmToolchain(17)
+dependencies {
+    testImplementation("org.jetbrains.kotlin:kotlin-test")
 }
