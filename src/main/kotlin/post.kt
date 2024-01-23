@@ -52,5 +52,21 @@ class WallService {
 }
 
 fun main() {
-    var post1 = Post(1, 2, 3, 2, 2023, "privet", 1, 1, true, "privet", true, true, true, likes = Likes(1, true, true, true), comments = Comments(5, true, true, true, true))
+    var post1 = Post(
+        1,
+        2,
+        3,
+        2,
+        2023,
+        "privet",
+        1,
+        1,
+        true,
+        "privet",
+        true,
+        true,
+        true,
+        likes = Likes(1, true, true, true),
+        comments = Comments(5, true, true, true, true)
+    )
 }
