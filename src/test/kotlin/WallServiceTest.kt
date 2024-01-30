@@ -24,7 +24,8 @@ class WallServiceTest {
                 true,
                 true,
                 likes = Likes(1, true, true, true),
-                comments = Comments(5, true, true, true, true)
+                comments = Comments(5, true, true, true, true),
+                attachments = listOf(AudioAttachment("audio", Audio(1, 25, "Oleg", "privet")))
             )
         )
         service.add(
@@ -43,7 +44,8 @@ class WallServiceTest {
                 true,
                 true,
                 likes = Likes(5, true, true, true),
-                comments = Comments(9, true, true, true, true)
+                comments = Comments(9, true, true, true, true),
+                listOf(AudioAttachment("audio", Audio(1, 25, "Oleg", "privet")))
             )
         )
         service.add(
@@ -62,7 +64,8 @@ class WallServiceTest {
                 true,
                 true,
                 likes = Likes(81, true, true, true),
-                comments = Comments(77, true, true, true, true)
+                comments = Comments(77, true, true, true, true),
+                listOf(AudioAttachment("audio", Audio(1, 25, "Oleg", "privet")))
             )
         )
 
@@ -81,7 +84,8 @@ class WallServiceTest {
             true,
             true,
             likes = Likes(1, true, true, true),
-            comments = Comments(5, true, true, true, true)
+            comments = Comments(5, true, true, true, true),
+            listOf(AudioAttachment("audio", Audio(1, 25, "Oleg", "privet")))
         )
 
 
@@ -109,7 +113,8 @@ class WallServiceTest {
                 true,
                 true,
                 likes = Likes(1, true, true, true),
-                comments = Comments(5, true, true, true, true)
+                comments = Comments(5, true, true, true, true),
+                listOf(AudioAttachment("audio", Audio(1, 25, "Oleg", "privet")))
             )
         )
         service.add(
@@ -128,7 +133,8 @@ class WallServiceTest {
                 true,
                 true,
                 likes = Likes(5, true, true, true),
-                comments = Comments(9, true, true, true, true)
+                comments = Comments(9, true, true, true, true),
+                listOf(AudioAttachment("audio", Audio(1, 25, "Oleg", "privet")))
             )
         )
         service.add(
@@ -147,7 +153,8 @@ class WallServiceTest {
                 true,
                 true,
                 likes = Likes(81, true, true, true),
-                comments = Comments(77, true, true, true, true)
+                comments = Comments(77, true, true, true, true),
+                listOf(AudioAttachment("audio", Audio(1, 25, "Oleg", "privet")))
             )
         )
         val update = Post(
@@ -165,7 +172,8 @@ class WallServiceTest {
             true,
             true,
             likes = Likes(1, true, true, true),
-            comments = Comments(5, true, true, true, true)
+            comments = Comments(5, true, true, true, true),
+            listOf(AudioAttachment("audio", Audio(1, 25, "Oleg", "privet")))
         )
         val result = service.update(update)
         assertFalse(result)
@@ -189,7 +197,8 @@ class WallServiceTest {
             true,
             true,
             likes = Likes(1, true, true, true),
-            comments = Comments(5, true, true, true, true)
+            comments = Comments(5, true, true, true, true),
+            listOf(AudioAttachment("audio", Audio(1, 25, "Oleg", "privet")))
         )
         var result = service.add(post)
         assertEquals(1, result.id)
