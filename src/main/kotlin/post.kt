@@ -86,16 +86,17 @@ data class Likes(
 )
 
 data class Comments(
-    val count: Int,
-    val canPost: Boolean,
-    val groupsCanPost: Boolean,
-    val canClose: Boolean,
-    val canOpen: Boolean
+    val id: Int,
+    val fromId: Int,
+    val date: Int,
+    val text: String
 )
 
 
 class WallService {
     private var posts = emptyArray<Post>()
+    private var comments = emptyArray<Comments>()
+
     private var nextId = 1
     fun add(post: Post): Post {
         post.id = nextId
@@ -112,10 +113,26 @@ class WallService {
         }
         return false
     }
+
+    class PostNotFoundException(message: String) : RuntimeException(message)
+
+    fun createComment(postId: Int, comment: Comments): Comments {
+        val post = posts.find { it.id == postId }
+        if (post != null) {
+            val newComment = Comments(comment.id, postId, comment.date, comment.text)
+            comments += newComment
+            val exitCode = 1
+            return newComment
+        } else {
+            val exitCode = 0
+            throw PostNotFoundException("Post not found with ID $postId")
+        }
+    }
 }
 
 fun main() {
-    var post1 = Post(
+    val service = WallService()
+    val post = Post(
         1,
         2,
         3,
@@ -130,7 +147,9 @@ fun main() {
         true,
         true,
         likes = Likes(1, true, true, true),
-        comments = Comments(5, true, true, true, true),
-        attachments = listOf(AudioAttachment("audio", Audio(1, 25, "Oleg", "privet")))
+        comments = Comments(1, 2, 2021, "like"),
+        listOf(AudioAttachment("audio", Audio(1, 25, "Oleg", "privet")))
     )
+    service.add(post)
+    service.createComment(1, comment = Comments(5, 6, 2024, "DISLIKE"))
 }
