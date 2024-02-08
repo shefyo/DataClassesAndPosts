@@ -1,6 +1,5 @@
-import org.junit.Test
-
 import org.junit.Assert.*
+import org.junit.Test
 
 class WallServiceTest {
     @Test
@@ -205,7 +204,7 @@ class WallServiceTest {
     }
 
     @Test
-    fun shouldAddCommentToExistingPost() {
+    fun shouldThrow() {
         val service = WallService()
         val post = Post(
             1,
@@ -238,12 +237,12 @@ class WallServiceTest {
 
         assertEquals(1, 1)
     }
-
-    @Test
-    fun shouldNotAddCommentToExistingPost() {
+    class PostNotFound(message: String) : RuntimeException(message)
+    @Test(expected = WallService.PostNotFound::class)
+    fun shouldNotThrow() {
         val service = WallService()
         val post = Post(
-            9,
+            1,
             2,
             3,
             2,
@@ -260,18 +259,8 @@ class WallServiceTest {
             comments = Comments(1, 2, 2021, "like"),
             listOf(AudioAttachment("audio", Audio(1, 25, "Oleg", "privet")))
         )
-        val comment = Comments(
-            id = 1,
-            fromId = 1,
-            date = 2023,
-            text = "Test comment"
-        )
-
-
         service.add(post)
-        service.createComment(1, comment)
-
-        assertEquals(0, 0)
+        service.createComment(9, comment = Comments(5, 6, 2024, "DISLIKE"))
     }
 
 }

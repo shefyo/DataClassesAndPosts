@@ -114,18 +114,16 @@ class WallService {
         return false
     }
 
-    class PostNotFoundException(message: String) : RuntimeException(message)
+    class PostNotFound(message: String) : RuntimeException(message)
 
     fun createComment(postId: Int, comment: Comments): Comments {
         val post = posts.find { it.id == postId }
         if (post != null) {
             val newComment = Comments(comment.id, postId, comment.date, comment.text)
             comments += newComment
-            val exitCode = 1
             return newComment
         } else {
-            val exitCode = 0
-            throw PostNotFoundException("Post not found with ID $postId")
+            throw PostNotFound("Post not found with ID $postId")
         }
     }
 }
@@ -151,5 +149,5 @@ fun main() {
         listOf(AudioAttachment("audio", Audio(1, 25, "Oleg", "privet")))
     )
     service.add(post)
-    service.createComment(1, comment = Comments(5, 6, 2024, "DISLIKE"))
+    service.createComment(9, comment = Comments(5, 6, 2024, "DISLIKE"))
 }
